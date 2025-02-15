@@ -26,7 +26,8 @@
 			throw new Error(getReasonPhrase(response.data.code));
 		} else if (response.status === 304) {
 			message = 'Данные были загружены из локального хранилища.'
-			console.log('Данные были загружены из локального хранилища.')
+		} else {
+			message = 'Были загруженны новые посты'
 		}
 
 		return response.data;
