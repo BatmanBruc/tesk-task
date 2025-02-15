@@ -1,7 +1,6 @@
 /**
  * Dependence
  */
-import { catchrequest, checkokstatus } from '$lib/api/utils/requests';
 import { api } from '$lib/api/api';
 import { ErrorUtils } from '$lib/utils/error';
 import { saveCache, getCache } from '$lib/api/utils/localCache';
@@ -9,7 +8,7 @@ import { saveCache, getCache } from '$lib/api/utils/localCache';
 /**
  * Types
  */
-import type { AxiosError, AxiosResponse } from 'axios';
+import type { AxiosError } from 'axios';
 import type { IPostsResponse } from '$lib/api/types/response/posts';
 import type { ISuccessResponse, ServerResponse } from '$lib/api/types/response/utils';
 import type { IPost } from '$lib/api/types/models/post';
@@ -28,7 +27,7 @@ async function getAll(): ServerResponse<IPostsResponse> {
 			data: response.data,
 			status: response.data
 		} as ISuccessResponse<IPostsResponse>;
-	} catch(e) {
+	} catch(e: unknown | AxiosError) {
 		const data = getCache<IPostsResponse>('posts');
 		if (data) {
 			return data
