@@ -22,7 +22,7 @@ export function saveCache<T>(nameModel: string, data: T[]): void {
 export function getCache<T>(nameModel: string): ISuccessResponse<T> | void {
   const data = localStorage.getItem(nameModel)
   if (!data) {
-    new Error('Not found data')
+    throw new Error('Not found data')
   } else {
     return {
       success: true,
